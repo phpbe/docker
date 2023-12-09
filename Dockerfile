@@ -1,6 +1,8 @@
-FROM phpswoole/swoole:php8.3-alpine
+FROM phpswoole/swoole:5.1.1-php8.3
 
-RUN apt-get update && apt-get install -y zip libaio1 git wget
+# RUN apt-get update && apt-get install -y zip libaio1 git wget
+
+RUN apk update && apk add --no-cache zip libaio1 git wget
 
 # 使用 php docker 推荐的 php-extension-installer 安装扩展
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
@@ -102,5 +104,5 @@ zip
 ENV BE_VERSION = ''
 
 
-ADD workspace /root/workspace
-ENTRYPOINT sh /root/workspace/start.sh 
+ADD start.sh /root/start.sh
+ENTRYPOINT sh /root/start.sh 

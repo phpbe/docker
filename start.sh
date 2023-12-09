@@ -9,24 +9,24 @@ fi
 if [ ! "$(ls -a /data/www)" ]; then
 	
 	# 代码目录为空，下载代码
-	cd /root/workspace/
+	cd /root/
 	if [ $BE_VERSION = "" ]; then
 		git clone https://github.com/phpbe/be.git
-		cp /root/workspace/be/server.php /data/www/server.php
-		cp /root/workspace/be/composer.json /data/www/composer.json
+		cp be/server.php /data/www/server.php
+		cp be/composer.json /data/www/composer.json
 		rm -rf be
 	else
 		wget https://github.com/phpbe/be/archive/refs/tags/$BE_VERSION.tar.gz
 		tar -zxvf $BE_VERSION.tar.gz
-		cp /root/workspace/$BE_VERSION/server.php /data/www/server.php
-		cp /root/workspace/$BE_VERSION/composer.json /data/www/composer.json
+		cp $BE_VERSION/server.php /data/www/server.php
+		cp $BE_VERSION/composer.json /data/www/composer.json
 		rm -rf $BE_VERSION $BE_VERSION.tar.gz
 	fi
 	
 	# composer 更新拉取 vendor 库
 	if [ -f /data/www/composer.json ]; then
 		cd /data/www
-		/root/workspace/composer.phar update
+		composer update
 	fi
 		
 	if [ ! -d /data/www/data ]; then
