@@ -99,8 +99,12 @@ zip
 
 WORKDIR /data/www
 
-ENV MYSQL-SERVER=0
-ENV REDIS-SERVER=1
+ENV MYSQL_SERVER=''
+ENV MYSQL_USERNAME='root'
+ENV MYSQL_PASSWORD='root'
+ENV MYSQL_DATABASE='be'
+
+ENV REDIS_SERVER='1'
 
 ADD start.sh /root/start.sh
 ENTRYPOINT sh /root/start.sh 

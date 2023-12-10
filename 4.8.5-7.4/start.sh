@@ -29,6 +29,7 @@ fi
 if [ ${MYSQL-SERVER} ]; then
 	# 安装本机 MySQL
 	echo '安装本机 MySQL'
+	apt-get install mysql-server
 fi
 
 
@@ -36,6 +37,8 @@ fi
 if [ ${REDIS-SERVER} ]; then
 
 	if [ ! -f /etc/init.d/redis-server ]; then
+	
+		echo '安装本机 REDIS'
 		# 安装本机 REDIS
 		apt-get update
 		apt-get install -y lsb-release curl gpg
