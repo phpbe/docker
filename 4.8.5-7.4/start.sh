@@ -58,7 +58,7 @@ if [ ${REDIS-SERVER} ]; then
 		cp /etc/redis/redis.conf /data/redis/conf/redis.conf
 	fi
 
-	/etc/init.d/redis-server /data/redis/conf/redis.conf start
+	/etc/init.d/redis-server /data/redis/conf/redis.conf --daemonize yes
 fi
 
 
