@@ -34,15 +34,17 @@ fi
 
 
 if [ ${REDIS-SERVER} ]; then
-	# 安装本机 REDIS
-	apt-get update
-	apt-get install -y lsb-release curl gpg
-	curl -fsSL https://packages.redis.io/gpg | gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
-	echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/redis.list
-	apt-get update
-	apt-get install -y redis
-	
-		
+
+	if [ ! -f /etc/init.d/redis-server ]; then
+		# 安装本机 REDIS
+		apt-get update
+		apt-get install -y lsb-release curl gpg
+		curl -fsSL https://packages.redis.io/gpg | gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+		echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/redis.list
+		apt-get update
+		apt-get install -y redis
+	fi
+
 	if [ ! -d /data/redis/data ]; then
 		mkdir -p /data/redis/data
 		chmod -R 777 /data/redis/data
@@ -52,7 +54,11 @@ if [ ${REDIS-SERVER} ]; then
 		mkdir -p /data/redis/conf
 	fi
 	
-	/etc/init.d/redis-server start
+	if [ ! -f /data/redis/conf/redis.conf ]; then
+		cp /etc/redis/redis.conf /data/redis/conf/redis.conf
+	fi
+
+	/etc/init.d/redis-server /data/redis/conf/redis.conf start
 fi
 
 
