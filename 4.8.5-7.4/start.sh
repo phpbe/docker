@@ -30,6 +30,16 @@ if [ ${MYSQL-SERVER} ]; then
 	# 安装本机 MySQL
 	echo '安装本机 MySQL'
 	apt-get install mysql-server
+	
+	if [ ! -d /data/mysql/data ]; then
+		mkdir -p /data/mysql/data
+		chmod -R 777 /data/mysql/data
+	fi
+				
+	if [ ! -d /data/mysql/conf ]; then
+		mkdir -p /data/mysql/conf
+	fi
+	
 fi
 
 
