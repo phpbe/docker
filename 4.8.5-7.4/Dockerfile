@@ -1,4 +1,4 @@
-FROM phpswoole/swoole:5.1.1-php8.3
+FROM phpswoole/swoole:4.8.5-php7.4
 
 
 ADD start.sh /root/start.sh
