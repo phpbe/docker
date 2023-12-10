@@ -10,8 +10,7 @@ if [ ! "$(ls -A /data/www)" ]; then
 	
 	# 代码目录为空，下载代码
 	cd /root/
-	echo "BE_VERSION: " + ${BE_VERSION}
-	if [ ${BE_VERSION} = "" ]; then
+	if [ ${BE_VERSION} ]; then
 		git clone https://github.com/phpbe/be.git
 		cp be/server.php /data/www/server.php
 		cp be/composer.json /data/www/composer.json
