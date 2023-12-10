@@ -4,7 +4,7 @@ RUN apt-get update && apt-get install -y git wget
 
 
 # 指定安装版本
-ENV BE_VERSION = ''
+ENV BE_VERSION=''
 
 
 ADD start.sh /root/start.sh
