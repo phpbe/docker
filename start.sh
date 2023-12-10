@@ -2,7 +2,7 @@
 
 
 if [ ! -d /data/www ]; then
-	mkdir /data/www
+	mkdir -p /data/www
 fi
 
 
