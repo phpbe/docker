@@ -14,14 +14,46 @@ if [ ! "$(ls -A /data/www)" ]; then
 	rm -rf new
 		
 	if [ ! -d /data/www/data ]; then
-		mkdir /data/www/data
+		mkdir -p /data/www/data
+		chmod -R 777 /data/www/data
 	fi
-	chmod -R 777 /data/www/data
 	
 	if [ ! -d /data/www/www ]; then
-		mkdir /data/www/data
+		mkdir -p /data/www/data
+		chmod -R 777 /data/www/www
 	fi
-	chmod -R 777 /data/www/www
+fi
+
+
+
+if [ ${MYSQL-SERVER} ]; then
+	# 安装本机 MySQL
+
+
+fi
+
+
+
+if [ ${REDIS-SERVER} ]; then
+	# 安装本机 REDIS
+	apt-get update
+	apt-get install -y lsb-release curl gpg
+	curl -fsSL https://packages.redis.io/gpg | gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+	echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/redis.list
+	apt-get update
+	apt-get install -y redis
+	
+		
+	if [ ! -d /data/redis/data ]; then
+		mkdir -p /data/redis/data
+		chmod -R 777 /data/redis/data
+	fi
+				
+	if [ ! -d /data/redis/conf ]; then
+		mkdir -p /data/redis/conf
+	fi
+	
+	/etc/init.d/redis-server start
 fi
 
 
