@@ -1,6 +1,6 @@
 FROM phpswoole/swoole:4.8.5-php7.4
 
-RUN apt-get update && apt-get install -y zip libaio1
+RUN apt-get update && apt-get install -y zip libaio1 procps net-tools iputils-ping vim
 
 # 使用 php docker 推荐的 php-extension-installer 安装扩展
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
