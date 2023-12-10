@@ -28,8 +28,7 @@ fi
 
 if [ ${MYSQL-SERVER} ]; then
 	# 安装本机 MySQL
-
-
+	echo '安装本机 MySQL'
 fi
 
 
