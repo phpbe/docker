@@ -6,7 +6,7 @@ if [ ! -d /data/www ]; then
 fi
 
 
-if [ ! "$(ls -a /data/www)" ]; then
+if [ ! "$(ls -A /data/www)" ]; then
 	
 	# 代码目录为空，下载代码
 	cd /root/
