@@ -7,27 +7,11 @@ fi
 
 
 if [ ! "$(ls -A /data/www)" ]; then
-	
-	# 代码目录为空，下载代码
+	# 代码目录为空，创建项目
 	cd /root/
-	if [ ${BE_VERSION} ]; then
-		wget https://github.com/phpbe/be/archive/refs/tags/${BE_VERSION}.tar.gz
-		tar -zxvf ${BE_VERSION}.tar.gz
-		cp ${BE_VERSION}/server.php /data/www/server.php
-		cp ${BE_VERSION}/composer.json /data/www/composer.json
-		rm -rf ${BE_VERSION} ${BE_VERSION}.tar.gz
-	else
-		git clone https://github.com/phpbe/be.git
-		cp be/server.php /data/www/server.php
-		cp be/composer.json /data/www/composer.json
-		rm -rf be
-	fi
-	
-	# composer 更新拉取 vendor 库
-	if [ -f /data/www/composer.json ]; then
-		cd /data/www
-		composer update
-	fi
+	composer create-project be/new
+	cp -rf new/* /data/www
+	rm -rf new
 		
 	if [ ! -d /data/www/data ]; then
 		mkdir /data/www/data
