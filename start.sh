@@ -10,17 +10,18 @@ if [ ! "$(ls -A /data/www)" ]; then
 	
 	# 代码目录为空，下载代码
 	cd /root/
-	if [ $BE_VERSION = "" ]; then
+	echo "BE_VERSION: " + ${BE_VERSION}
+	if [ ${BE_VERSION} = "" ]; then
 		git clone https://github.com/phpbe/be.git
 		cp be/server.php /data/www/server.php
 		cp be/composer.json /data/www/composer.json
 		rm -rf be
 	else
-		wget https://github.com/phpbe/be/archive/refs/tags/$BE_VERSION.tar.gz
-		tar -zxvf $BE_VERSION.tar.gz
-		cp $BE_VERSION/server.php /data/www/server.php
-		cp $BE_VERSION/composer.json /data/www/composer.json
-		rm -rf $BE_VERSION $BE_VERSION.tar.gz
+		wget https://github.com/phpbe/be/archive/refs/tags/${BE_VERSION}.tar.gz
+		tar -zxvf ${BE_VERSION}.tar.gz
+		cp ${BE_VERSION}/server.php /data/www/server.php
+		cp ${BE_VERSION}/composer.json /data/www/composer.json
+		rm -rf ${BE_VERSION} ${BE_VERSION}.tar.gz
 	fi
 	
 	# composer 更新拉取 vendor 库
